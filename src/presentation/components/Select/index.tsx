@@ -1,4 +1,9 @@
 import React from 'react';
+import {
+    FieldValues,
+    UseFormRegister,
+  } from "react-hook-form"
+
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,21 +18,29 @@ interface OptType {
 interface Props {
     label: string;
     options: Array<OptType>;
-    onChange?: () => {};
-    register?: () => {};
+    handleChange?: () => {};
+    register:  UseFormRegister<FieldValues>;
 }
 
 export const SelectComponent: React.FC<Props> = ({
     label,
     options,
-    onChange
+    handleChange,
+    register
 }) => {
     return(
         <Box sx={{ minWidth: 120}}>
             <FormControl fullWidth>
-                <InputLabel></InputLabel>
+                <InputLabel>{label}</InputLabel>
+                <Select
+                    label={label}
+                    {...register(`${label}`)}
+                >
+                    {options?.map((opt) => {
+                        return(<MenuItem value={opt.value}>{opt.name}</MenuItem>)
+                    })}
+                </Select>
             </FormControl>
-
         </Box>
 
     )
