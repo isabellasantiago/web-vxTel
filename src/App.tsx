@@ -1,13 +1,10 @@
-import { useState } from 'react'
+import React from 'react';
+import { Page } from "@/presentation"
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <p>Hello World</p>
-    </div>
+    <Page />
   )
 }
 
