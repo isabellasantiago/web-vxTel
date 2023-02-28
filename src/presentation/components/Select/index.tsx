@@ -1,14 +1,10 @@
 import React from 'react';
-import {
-    FieldValues,
-    UseFormRegister,
-  } from "react-hook-form"
-
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
+import { ControllerRenderProps, FieldValues, RefCallBack } from 'react-hook-form';
 
 interface OptType {
     value: any;
@@ -17,28 +13,26 @@ interface OptType {
 
 interface Props {
     label: string;
-    options: Array<OptType>;
-    handleChange?: () => {};
-    register:  UseFormRegister<FieldValues>;
+    options: Array<OptType> | undefined;
+    field: ControllerRenderProps<FieldValues, any>
 }
 
 export const SelectComponent: React.FC<Props> = ({
     label,
     options,
-    handleChange,
-    register
+    field
 }) => {
     return(
-        <Box sx={{ minWidth: 120}}>
+        <Box sx={{ minWidth: 220}}>
             <FormControl fullWidth>
                 <InputLabel>{label}</InputLabel>
                 <Select
                     label={label}
-                    {...register(`${label}`)}
+                    {...field}
                 >
-                    {options?.map((opt) => {
-                        return(<MenuItem value={opt.value}>{opt.name}</MenuItem>)
-                    })}
+                {options?.map((opt) => {
+                    return(<MenuItem value={opt.value} key={opt.value}>{opt.name}</MenuItem>)
+                })}
                 </Select>
             </FormControl>
         </Box>
