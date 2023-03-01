@@ -48,7 +48,9 @@ Mas, caso queira instalar apenas o front end:
     # Iniciar o projeto
     $ yarn dev
 ```
+
 O projeto roda na porta 5173, porta padrão do Vite.
+
 ---
 
 Desenvolvido 💜 por Isabella Santiago
