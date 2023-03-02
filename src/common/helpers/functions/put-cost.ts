@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { CostInput } from '@/common/interfaces/costInput.interface';
 
-const nodeEnv = import.meta.env.VITE_NODE_API
+const nodeEnv = import.meta.env.VITE_NODE_API || '3333'
 
 
 const baseUrl = `http://localhost:${nodeEnv}/finalCost`
