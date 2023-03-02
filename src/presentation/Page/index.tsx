@@ -3,15 +3,15 @@ import { Header } from '@/presentation/components';
 import { ReactComponent as MobilePayment } from '@/presentation/assets/mobile_payment.svg'
 import * as S from './style';
 import { Form } from '../components/Form';
-import { ICost } from '@/domain/interfaces/cost.interface';
-import { useWindowSize } from '@/domain/interfaces/hooks/useWindowSize';
+import { ICost } from '@/common/interfaces/cost.interface';
+import { useWindowSize } from '@/common/hooks/useWindowSize';
 
 
 
 export const Page = () => {
     const [cost, setCost] = useState<ICost>({
-        priceWithoutPlan: 1000,
-        priceWithPlan: 1000,
+        priceWithoutPlan: 0,
+        priceWithPlan: 0,
     })
     const { width } = useWindowSize();
 
@@ -35,9 +35,9 @@ export const Page = () => {
                         {cost.priceWithPlan !== 0 ? (
                             <S.ResultContainer>
                                 <S.ResultTitle>Com FaleMais</S.ResultTitle>
-                                <S.Result>{`R$ ${cost.priceWithPlan}`}</S.Result>
+                                <S.Result>{`R$ ${cost.priceWithPlan.toFixed(2)}`}</S.Result>
                                 <S.ResultTitle>Sem FaleMais</S.ResultTitle>
-                                <S.Result>{`R$ ${cost.priceWithoutPlan}`}</S.Result>
+                                <S.Result>{`R$ ${cost.priceWithoutPlan.toFixed(2)}`}</S.Result>
                                 <S.RecalculateBtn onClick={handleClickRecalculate}>Recalcular</S.RecalculateBtn>
                             </S.ResultContainer>
                         ) : (

@@ -1,10 +1,11 @@
 import React from 'react';
-import { defaultValues } from "@/constants";
+import { defaultValues } from "@/common/constants";
 import { Controller, useForm } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 import { SelectComponent } from "../Select";
 import * as  S from './style';
-import { ICost } from '@/domain/interfaces/cost.interface';
+import { ICost } from '@/common/interfaces/cost.interface';
+import { putCost } from '@/common/helpers/functions/put-cost';
 
 interface Props {
     setCost: React.Dispatch<React.SetStateAction<ICost>>
@@ -38,12 +39,15 @@ export const Form: React.FC<Props> = ({
     if(fromInput === '011') toOptions = optionsDDD.slice(1);
     if(fromInput !== '011') toOptions = optionsDDD.filter(({ name }) => name === '011');
 
-    const onSubmit = (data: any) => {
-        console.log('data', data)
-        // setCost()
-    }
+    const onSubmit = async (data: any) => {
+        try {
+            const response = await putCost(data)
+            setCost(response);
 
-    console.log('watch', watch())
+        } catch(err){
+            console.log('error', err)
+        }
+    }
 
     return(
         <S.FormStyled onSubmit={handleSubmit(onSubmit)}>
